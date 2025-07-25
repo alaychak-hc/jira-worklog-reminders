@@ -4,7 +4,7 @@
 #    Email: ALaychak@HarrisComputer.com
 #
 #    Created At: 07-25-2025 03:40:19 PM
-#    Last Modified: 07-25-2025 03:52:30 PM
+#    Last Modified: 07-25-2025 03:56:04 PM
 #    Last Updated By: Andrew Laychak
 #
 #    Description: This GitHub Actions workflow runs a daily time summary script.
@@ -30,16 +30,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
 
-      - name: Enable Corepack & Activate pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 'latest'
 
       - name: Install dependencies
         run: pnpm install
