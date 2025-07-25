@@ -1,0 +1,26 @@
+{
+  "name": "jira-worklog-reminders",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "start": "dotenvx run -- node dist/index.js",
+    "start:dev": "dotenvx run -- tsx src/index.ts",
+    "build": "tsc -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
+    "envalid": "^8.1.0",
+    "jira.js": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}
