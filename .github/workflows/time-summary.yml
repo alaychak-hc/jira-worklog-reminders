@@ -4,7 +4,7 @@
 #    Email: ALaychak@HarrisComputer.com
 #
 #    Created At: 07-25-2025 03:40:19 PM
-#    Last Modified: 07-25-2025 03:56:04 PM
+#    Last Modified: 07-25-2025 03:57:03 PM
 #    Last Updated By: Andrew Laychak
 #
 #    Description: This GitHub Actions workflow runs a daily time summary script.
@@ -45,7 +45,7 @@ jobs:
       - name: Install dotenvx
         run: curl -sfS https://dotenvx.sh/install.sh | sh
 
-      - name: Run time‐summary script
-        run: pnpm tsx src/index.ts
+      - name: Run time-summary script
+        run: pnpm start:dev
         env:
           DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
