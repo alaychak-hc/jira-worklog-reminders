@@ -1,0 +1,48 @@
+# region Developer Information
+# ----------------------------------------
+#    Author: Andrew Laychak
+#    Email: ALaychak@HarrisComputer.com
+#
+#    Created At: 07-25-2025 03:40:19 PM
+#    Last Modified: 07-25-2025 03:40:30 PM
+#    Last Updated By: Andrew Laychak
+#
+#    Description: This GitHub Actions workflow runs a daily time summary script.
+#
+#    References:
+#      - None
+# ----------------------------------------
+# #endregion
+
+name: Daily Time Summary
+
+on:
+  # run at 14:00 UTC every day → 08:00 America/Chicago (CST)
+  schedule:
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Install dotenvx
+        run: curl -sfS https://dotenvx.sh/install.sh | sh
+
+      - name: Run time‐summary script
+        run: pnpm tsx src/index.ts
+        env:
+          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
