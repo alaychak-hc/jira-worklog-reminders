@@ -6,6 +6,7 @@
   "scripts": {
     "start": "dotenvx run -- node dist/index.js",
     "start:dev": "dotenvx run -- tsx src/index.ts",
+    "start:dev:local": "dotenvx run -f .env.local -- tsx src/index.ts",
     "build": "tsc -p ."
   },
   "keywords": [],

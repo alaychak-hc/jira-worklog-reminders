@@ -5,7 +5,7 @@
   Email: ALaychak@HarrisComputer.com
 
   Created At: 07-25-2025 03:41:17 PM
-  Last Modified: 07-25-2025 03:44:23 PM
+  Last Modified: 07-29-2025 11:33:59 PM
   Last Updated By: Andrew Laychak
 
   Description: Utilities for the application
@@ -17,7 +17,7 @@
 // #endregion
 
 // #region Imports
-import { startOfMonth, subDays } from 'date-fns';
+import { startOfDay, startOfMonth, subDays } from 'date-fns';
 import { formatInTimeZone } from 'date-fns-tz';
 // #endregion
 
@@ -53,6 +53,13 @@ function getYesterdayRange(): [Date, Date] {
 }
 // #endregion
 
+// #region Get Today Range
+function getTodayRange(): [Date, Date] {
+  const now = new Date();
+  return [startOfDay(now), now];
+}
+// #endregion
+
 // #region Get Month to Date Range
 function getMonthToDateRange(): [Date, Date] {
   const today = new Date();
@@ -61,5 +68,11 @@ function getMonthToDateRange(): [Date, Date] {
 // #endregion
 
 // #region Exports
-export { formatHM, isInRange, getYesterdayRange, getMonthToDateRange };
+export {
+  formatHM,
+  isInRange,
+  getYesterdayRange,
+  getTodayRange,
+  getMonthToDateRange,
+};
 // #endregion

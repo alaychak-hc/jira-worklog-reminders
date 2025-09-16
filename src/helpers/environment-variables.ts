@@ -5,7 +5,7 @@
   Email: ALaychak@HarrisComputer.com
 
   Created At: 05-10-2024 12:00:42 AM
-  Last Modified: 07-25-2025 11:21:36 AM
+  Last Modified: 07-29-2025 11:27:32 PM
   Last Updated By: Andrew Laychak
 
   Description: Helper file that validates environment variables.
@@ -32,6 +32,7 @@ const env = cleanEnv(process.env, {
   // #region JIRA
   JIRA_BASE_URL: str(),
   JIRA_EMAIL: str(),
+  JIRA_ACCOUNT_ID: str(),
   JIRA_API_TOKEN: str(),
   TEAM_ACCOUNT_IDS: json<string[]>(),
   TZ: str(),

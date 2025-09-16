@@ -6,6 +6,7 @@ import { postToTeams } from './notify/teams.js';
 import {
   formatHM,
   getMonthToDateRange,
+  getTodayRange,
   getYesterdayRange,
 } from './helpers/utilities.js';
 // #endregion
@@ -75,8 +76,34 @@ async function run(): Promise<void> {
   }
 }
 
+async function getMyTimeToday() {
+  const [start, end] = getTodayRange();
+
+  const worklogs = await getUserWorklogsForRange(start, end);
+  const myWorklog = worklogs.find((u) => u.accountId === env.JIRA_ACCOUNT_ID);
+
+  if (myWorklog) {
+    console.log(
+      `You worked ${chalk.green(formatHM(myWorklog.totalSeconds))} today.`
+    );
+
+    for (const e of myWorklog.entries) {
+      console.log(
+        indent(`${e.issueKey}: ${e.summary} - ${formatHM(e.seconds)}`)
+      );
+    }
+  } else {
+    console.log(chalk.red('No worklogs found for today.'));
+  }
+}
+
 try {
   await run();
+
+  if (env.NODE_ENV === 'local') {
+    console.log(chalk.bold.blue('\nChecking your worklogs for today...'));
+    await getMyTimeToday();
+  }
 } catch (error) {
   console.error('Error occurred while checking worklogs:', error);
   process.exit(1);

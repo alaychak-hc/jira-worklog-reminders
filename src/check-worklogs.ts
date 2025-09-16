@@ -5,7 +5,7 @@
   Email: ALaychak@HarrisComputer.com
 
   Created At: 07-25-2025 03:44:56 PM
-  Last Modified: 07-25-2025 03:45:07 PM
+  Last Modified: 09-16-2025 12:19:30 PM
   Last Updated By: Andrew Laychak
 
   Description: Function to get user worklogs for a specified date range.
@@ -68,11 +68,12 @@ async function getUserWorklogsForRange(
 
   for (const accountId of env.TEAM_ACCOUNT_IDS) {
     const jql = `worklogAuthor = ${accountId} AND worklogDate >= "${startStr}" AND worklogDate <= "${endStr}"`;
-    const search = await client.issueSearch.searchForIssuesUsingJql({
-      jql,
-      maxResults: 1000,
-      fields: ['key', 'summary'],
-    });
+    const search =
+      await client.issueSearch.searchForIssuesUsingJqlEnhancedSearch({
+        jql,
+        maxResults: 1000,
+        fields: ['key', 'summary'],
+      });
 
     // map issueKey -> { summary, seconds }
     const issueMap: Record<string, { summary: string; seconds: number }> = {};
